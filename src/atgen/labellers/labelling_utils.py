@@ -1,0 +1,2 @@
+class OutOfBudgetException(Exception):
+    pass

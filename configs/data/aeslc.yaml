@@ -1,0 +1,16 @@
+dataset: 'aeslc'
+input_column_name: 'email_body'
+output_column_name: 'subject_line'
+train_subset_size: null
+test_subset_size: null
+has_test: true
+input_max_length: 1024
+output_max_length: 20
+fetch_kwargs: {}
+prompt: |
+    Write a subject text for the email.
+
+    Email:
+    {text}
+
+    Subject text:

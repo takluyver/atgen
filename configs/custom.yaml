@@ -1,0 +1,56 @@
+defaults:
+  - labeller: custom_llm
+  - data: aeslc
+
+name: base
+output_dir: outputs
+offline_mode: False
+cache_dir: cache
+seed: 42
+al:
+    strategy: random
+    init_query_size: 10
+    query_size: 10
+    num_iterations: 5
+    subsample_size: -1
+    required_performance:
+        rouge1: 0.5
+    budget:
+    strategy_kwargs:
+      lambda_: 0.17
+
+model:
+    checkpoint: stabilityai/stablelm-2-zephyr-1_6b
+    quantize: False
+    model_max_length: ${data.input_max_length}
+    dtype: float16
+    separator: "<|assistant|>\n"
+    peft:
+        use: True
+        r: 64
+        lora_alpha: 64
+        lora_dropout: 0.1
+        bias: 'none'
+        modules:
+
+training:
+    dev_split_size: 0.2
+    hyperparameters:
+        num_epochs: 5
+        train_batch_size: 6
+        eval_batch_size: 4
+        gradient_accumulation_steps: 2
+        lr: 0.00003
+        warmup_ratio: 0.03
+        weight_decay: 0.01
+        max_grad_norm: 1.
+        early_stopping_patience: 5
+        optimizer: adamw_hf
+
+inference:
+    framework: 'vllm'
+    max_new_tokens: ${data.output_max_length}
+    batch_size: 8
+    gpu_memory_utilization: 0.5
+    temperature: 0.
+    top_p: 0.5

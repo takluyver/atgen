@@ -1,0 +1,9 @@
+type: custom_llm
+keep_in_memory: False
+model:
+  checkpoint: microsoft/Phi-3-mini-4k-instruct
+  dtype: float16
+  model_max_length: ${model.model_max_length}
+  quantize: False
+
+inference: ${inference}

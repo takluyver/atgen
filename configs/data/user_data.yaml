@@ -1,0 +1,16 @@
+dataset: aeslc
+fetch_kwargs: {}
+has_test: true
+input_column_name: email_body
+input_max_length: 256
+output_column_name: subject_line
+output_max_length: 20
+prompt: 'Write a subject line for the email:
+
+
+  {text}
+
+
+  Subject line:'
+test_subset_size: 100
+train_subset_size: 1000
