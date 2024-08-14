@@ -219,7 +219,7 @@ Prompt:\n{prompt})
                 rmtree(save_dir)
 
             metrics = compute_metrics(
-                generations, test_data[output_column_name], test_data[input_column_name]
+                generations, test_data[output_column_name], test_data[input_column_name], add_metrics_to_use=config.al.additional_metrics,
             )
 
             if required_performance_dict is not None:
@@ -243,7 +243,8 @@ Prompt:\n{prompt})
         combine_results(workdir, al_iter)
 
         log.info(f"Iteration {al_iter}: saving the trained model...")
-        model.save_pretrained(workdir / "model.bin")
+        if config.save_model:
+            model.save_pretrained(workdir / "model.bin")
 
         # Make AL query for the next round if we have not run out of iterations
         if al_iter != num_al_iterations:

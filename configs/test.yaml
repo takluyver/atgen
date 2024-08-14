@@ -11,16 +11,17 @@ al:
     strategy: random
     init_query_size: 2
     query_size: 2
-    num_iterations:
+    num_iterations: 1
     subsample_size: -1
     required_performance:
         rouge1: 0.5
     budget:
     strategy_kwargs:
         lambda_: 0.17
+    additional_metrics: []
 
 model:
-    checkpoint: stabilityai/stablelm-2-zephyr-1_6b
+    checkpoint: TinyLlama/TinyLlama-1.1B-Chat-v1.0
     quantize: False
     model_max_length: ${data.input_max_length}
     dtype: float16
