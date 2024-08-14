@@ -1,5 +1,7 @@
 from math import ceil
+import os
 from typing import List, Dict
+from urllib.request import urlretrieve
 
 import nltk
 import numpy as np
@@ -369,6 +371,9 @@ def calculate_alignscore(
     device: str = "cuda",
     cache_dir: str = "cache",
 ):
+    if not os.path.exists("AlignScore-base.ckpt"):
+        urlretrieve("https://huggingface.co/yzha/AlignScore/resolve/main/AlignScore-base.ckpt", "AlignScore-base.ckpt")
+
     scorer = AlignScore(
         model="roberta-base",
         batch_size=batch_size,

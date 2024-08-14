@@ -16,6 +16,7 @@ def validate_and_fill_config(config: DictConfig) -> DictConfig:
         config.setdefault("name", "I have no name!")
         config.setdefault("seed", 42)
         config.setdefault("cache_dir", "cache")
+        config.setdefault("save_model", True)
 
         # Experiment
         validate_field(config, "al")
@@ -26,6 +27,7 @@ def validate_and_fill_config(config: DictConfig) -> DictConfig:
         # TODO choose strategy automatically
         validate_field(config, "al.strategy")
         config.al.setdefault("required_performance", {})
+        config.al.setdefault("additional_metrics", [])
 
         # Data
         validate_field(config, "data")
